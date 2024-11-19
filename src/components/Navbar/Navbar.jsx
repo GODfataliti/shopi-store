@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { ShoppingCartContext } from "../../context";
 import { NavItem } from "./NavItem"
 
 let menu1 = [
@@ -14,12 +16,13 @@ let menu2 = [
   { to:'/my-orders', children:'My Orders' },
   { to:'/my-account', children:'My Account' },
   { to:'/sign-in', children:'Sign In' },
-  { to:'/', children:'🛒 0' },
+  // { to:'/', children:'🛒 0' },
 ]
 
 
 
 export const Navbar = () => {
+  const context = useContext(ShoppingCartContext);
   const activeStyle = 'underline underline-offset-4'
   return (
     <nav className='flex justify-between items-center fixed z-10 top-0 w-full py-5 px-8 text-sm font-light'>
@@ -37,6 +40,9 @@ export const Navbar = () => {
             <NavItem to={ruta.to} children={ruta.children} activeStyle={activeStyle} />
           </li>)
         )}
+        <li>
+          <NavItem to='/' children={`🛒 ${context?.count}`} activeStyle={activeStyle} />
+        </li>
       </ul>
 
     </nav>
