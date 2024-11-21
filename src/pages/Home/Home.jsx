@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 // api
 import { getProducts } from '../../consultas/products'
 // components
-import { Layaout, Card } from '../../components'
+import { Layaout, Card, ProductDetail } from '../../components'
 
 function Home() {
   const [products, setProducts] = useState([])
@@ -26,7 +26,7 @@ function Home() {
             <Card 
               key={item?.id}
               id={item?.id}
-              src={item?.images[0] ?? item?.images[1]}
+              src={item?.images[0] ?? item?.category?.image}
               alt={item?.description}
               tag={item.category?.name ?? 'Others'}
               nameProduct={item?.title}
@@ -34,6 +34,7 @@ function Home() {
             />
           ))}
         </div>
+        <ProductDetail />
       </Layaout>
     </>
   )
